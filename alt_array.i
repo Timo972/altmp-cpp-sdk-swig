@@ -22,7 +22,7 @@ namespace alt {
         Array();
         Array(const value_type* _data, alt_size _size);
         Array(const Array& other);
-        Array(Array&& other);
+        // Array(Array&& other);
 
         alt_size GetSize() const;
         alt_size GetCapacity() const;

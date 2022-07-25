@@ -1,6 +1,8 @@
 %module altsdk
 
 // %feature("flatnested");
+%define ALT_SERVER_API
+%enddef
 
 %{
 #include "CRefCountable.h"
@@ -73,10 +75,45 @@
 %include <std_string.i>
 %include <stdint.i>
 %include <std_vector.i>
+namespace std {
+    // using namespace alt;
+    %template(vectorstr) vector<string>;
+    %template(vectorv2f) vector<Vector2f>;
+    %template(vectorrefplayer) vector<Ref<alt::IPlayer>>;
+    %template(vectorptrresource) vector<alt::IResource*>;
+}
 
 %include "CRefCountable.h"
 
+/*%include alt_ref.i
+%template(wrefplayer) alt::Ref<alt::IPlayer>;
+%template(wrefaltentity) alt::Ref<alt::IEntity>;
+%template(wrefvehicle) alt::Ref<alt::IVehicle>;
+%template(wrefbaseobject) alt::Ref<alt::IBaseObject>;
+
+%template(refentity) alt::RefBase<RefStore<alt::IEntity>>;
+%template(refplayer) alt::RefBase<RefStore<alt::IPlayer>>;
+%template(refbaseobject) alt::RefBase<RefStore<alt::IBaseObject>>;
+%template(refvehicle) alt::RefBase<RefStore<alt::IVehicle>>;
+
+%template(refstoreentity) RefStore<alt::IEntity>;
+%template(refstoreplayer) RefStore<alt::IPlayer>;
+%template(refstorevehicle) RefStore<alt::IVehicle>;
+%template(refstorebaseobject) RefStore<alt::IBaseObject>;*/
 %include alt_array.i
+namespace alt {
+%template(arrayrefplayer) Array<Ref<alt::IPlayer>>;
+%template(arrayrefentity) Array<Ref<alt::IEntity>>;
+%template(arrayrefvehicle) Array<Ref<alt::IVehicle>>;
+%template(arrayrefblip) Array<Ref<alt::IBlip>>;
+%template(arrayperm) Array<Permission>;
+%template(arrayuint8) Array<uint8_t>;
+%template(arraystr) Array<std::string>;
+%template(arrayfireinfo) Array<alt::CFireEvent::FireInfo>;
+%template(arrayuint32) Array<uint32_t>;
+%template(arrayweapon) Array<Weapon>;
+%template(arraymvalueconst) Array<ConstRef<alt::IMValue>>;
+}
 %include alt_mvalue.i
 
 %include "types/Types.h"
